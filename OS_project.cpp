@@ -201,7 +201,7 @@ void front()
 main()
 {
 	int exit = 1,n=0,n1,opt,i,t,c=0;
-	process p[10],maxat;
+	process p[20],maxat;
 	while(exit==1)
 	{
 		system("CLS");
@@ -288,6 +288,7 @@ main()
 						algo(p,t,maxat,n);
 						arrivalsort(p,n);
 						cout<<"\n\tFinal value of timer: "<<timer;
+						cout<<"\n\n\tNow go to option 5 (' Final Result ') ";
 					}
 					cout<<"\n\n\n\tPress ENTER or any key to go back.";
 					getch();
