@@ -18,11 +18,11 @@ class process				// This Class contains arrival, burst, waiting, completion and 
 			pid=++count;
 			cout<<"\n\nFor process ID         : "<<pid<<endl;	// Process ID value taken as input.
 			cout<<"Enter priority number  : ";					
-			cin>>pn;											// Priority number taken as input.
+			cin>>pn;						// Priority number taken as input.
 			cout<<"Enter Arrival Time     : ";
-			cin>>at;											// Arrival Time taken as input.
+			cin>>at;						// Arrival Time taken as input.
 			cout<<"Enter Burst time       : ";
-			cin>>bt;											// Burst Time taken as input.
+			cin>>bt;						// Burst Time taken as input.
 			pbt=bt;
 		}
 		
@@ -38,7 +38,7 @@ class process				// This Class contains arrival, burst, waiting, completion and 
 		}
 		
 		void reset(int &timer)		// This function reset timer and completion time of each process to 0,
-		{							// and reset burst time to initial burst time value.
+		{				// and reset burst time to initial burst time value.
 			timer=0;
 			bt=pbt;
 			ct=0;
@@ -50,7 +50,7 @@ class process				// This Class contains arrival, burst, waiting, completion and 
 			cout<<"\t------------|----------------------------------------------------------------------------------------------\n";
 		}
 		
-		void finaldis()				// This function display the final value of all the attributes of each process after scheduling .
+		void finaldis()			// This function display the final value of all the attributes of each process after scheduling .
 		{
 			cout<<"\t   "<<pid<<"\t\t|\t "<<pn<<"\t\t    "<<at<<"\t\t\t  "<<pbt<<"\t\t\t "<<ct<<"\t\t\t  "<<tat<<"\t\t       "<<wt<<"\n";
 			cout<<"\t----------------|-----------------------------------------------------------------------------------------------------------------------------\n";
@@ -59,13 +59,13 @@ class process				// This Class contains arrival, burst, waiting, completion and 
 
 int process::count=0; 		// Counter is declare and initialize to keep count of each object and to get Process ID.
 
-void header()				// This function is just to give a header as a layout.
+void header()			// This function is just to give a header as a layout.
 {
 	cout<<"\n\n\tProcess ID"<<"  | Timer     "<<"Priority number"<<"\t  Arrival Time"<<"\t   Initial Burst time"<<"\t   Burst time\n";
 	cout<<"\t------------|----------------------------------------------------------------------------------------------\n";
 }
 
-void finalhead()			// This function is just to give a header as a layout.
+void finalhead()		// This function is just to give a header as a layout.
 {
 	cout<<"\n\n\tProcess ID"<<"\t|  priority number"<<"     Arrival Time"<<"\t  Initial Burst time"<<"\t   Completion time"<<"\t   Turn-around time"<<"\t   Waiting time\n";
 	cout<<"\t----------------|-----------------------------------------------------------------------------------------------------------------------------\n";
@@ -74,7 +74,7 @@ void finalhead()			// This function is just to give a header as a layout.
 void finalcal(process p[],int n)		// This function is to calculate the final value of each process.
 {
 	float avgtat=0,avgwt=0;
-	finalhead();						// Header is called here
+	finalhead();				// Header is called here
 	for(int i=0;i<n;i++)
 	{
 		p[i].tat=p[i].ct-p[i].at;
@@ -85,10 +85,10 @@ void finalcal(process p[],int n)		// This function is to calculate the final val
 	}
 	avgtat=avgtat/n;
 	avgwt=avgwt/n;
-	cout<<"\n\t\tAverage Turn-Around Time  : "<<avgtat<<"\n\n\t\tAverage Waiting Time      : "<<avgwt;		// Average Turnaround and Waiting time is displayed.
+	cout<<"\n\t\tAverage Turn-Around Time  : "<<avgtat<<"\n\n\t\tAverage Waiting Time      : "<<avgwt;	// Average Turnaround and Waiting time is displayed.
 }
 
-void arrivalsort(process p[],int n)			// This function sort process according to Arrival time in Increasing order. (Insertion Sort)
+void arrivalsort(process p[],int n)		// This function sort process according to Arrival time in Increasing order. (Insertion Sort)
 {
 	int i,j,k;
 	process z;
@@ -106,7 +106,7 @@ void arrivalsort(process p[],int n)			// This function sort process according to
 		}
 }
 
-void prioritysort(process p[],int n)			// This function sort process according to Priority number in Decreasing order. (Insertion Sort)
+void prioritysort(process p[],int n)		// This function sort process according to Priority number in Decreasing order. (Insertion Sort)
 {
 	int i,j,k;
 	process z;
@@ -124,7 +124,7 @@ void prioritysort(process p[],int n)			// This function sort process according t
 		}	
 }
 
-int maxpn(int k,process p[])			// This function return process of highest priority number.
+int maxpn(int k,process p[])		// This function return process of highest priority number.
 {
 	int max=p[0].pn,j=0;
 	for(int i=0;i<k;i++)
@@ -141,9 +141,9 @@ int maxpn(int k,process p[])			// This function return process of highest priori
 void algo(process p[],int t,process maxat,int n)		// This is the Main Algorithem which run scheduling according to Arrival time and priority number.
 {
 	int i,k,temp,l=0,j=0;
-	timer=p[0].at;					// Here timer is set to first process having least Arrival time.
+	timer=p[0].at;			// Here timer is set to first process having least Arrival time.
 	header();
-	while(true)				// While loop which run until break line is executed.
+	while(true)			// While loop which run until break line is executed.
 	{
 		k=0;
 		for(i=0;i<n;i++)
@@ -174,18 +174,18 @@ void algo(process p[],int t,process maxat,int n)		// This is the Main Algorithem
 		else if(p[j].at<=timer && p[j].bt!=0)		// This conditon will run for highest priority process for which burst time is not zero.
 		{
 			temp=t;
-			p[j].execution(t);			// Burst time is executed and updated depending on time quantum 't'.
+			p[j].execution(t);		// Burst time is executed and updated depending on time quantum 't'.
 			p[j].display(timer);		// Updated Burst time is displayed with other attributes.
-			timer=timer+t;				// Timer is incremented.
+			timer=timer+t;			// Timer is incremented.
 			t=temp;
 			if(p[j].bt==0)			// When Burst timee value of the process become zero this condtion will be true.
-				p[j].ct=timer;		//	Completion time is set of the process as soon as burst time become zero.
+				p[j].ct=timer;		// Completion time is set of the process as soon as burst time become zero.
 		}
 		else		// This will run when the burst time of any process become zero but all the process have not arrived.
 		{
-			if(p[l].bt!=0)				// Here burst time of that process is check which still not have arrived but is next in the queue.
-				timer=p[l].at;			// timer is updated to Arrival time of process which is next in queue.
-			++l;					// If Burst time of the next process is also 0 then this variable is increamented to check further in queue.
+			if(p[l].bt!=0)			// Here burst time of that process is check which still not have arrived but is next in the queue.
+				timer=p[l].at;		// timer is updated to Arrival time of process which is next in queue.
+			++l;				// If Burst time of the next process is also 0 then this variable is increamented to check further in queue.
 		}
 				
 	}
@@ -200,7 +200,7 @@ void front()		// This function will show the main menu of the program with diffe
 main()		// Program starts from here.
 {
 	int exit = 1,n=0,n1,opt,i,t,c=0;
-	process p[20],maxat;				// Here Object of class process is created where each object represent single process.
+	process p[20],maxat;			// Here Object of class process is created where each object represent single process.
 	while(exit==1)			// A while loop, runs until user chooses to exit.
 	{
 		system("CLS");
@@ -212,7 +212,7 @@ main()		// Program starts from here.
 					cout<<"\n\n\n\tEnter number of process\n\n\n\t( PRESS 0 for main menu ): \t";
 					cin>>n1;			// Number of process is asked.
 					system("CLS");
-					n1=n1+n;				// Number of process is added to existing number of the process.
+					n1=n1+n;			// Number of process is added to existing number of the process.
 					for(i=n;i<n1;i++)
 					{
 						p[i].input();		// User is able to input different attribute of a each process like AT,BT,etc.
@@ -244,7 +244,7 @@ main()		// Program starts from here.
 						p[i].display(timer);		// Display process before delete.
 					}
 					cout<<"\n\tEnter process ID you want deleted \n\n\t(Enter 0 to delete all)\n\t(Enter '111' for main menu) : \t";
-					cin>>d;				// Process ID is inputed of which user want to delete.
+					cin>>d;			// Process ID is inputed of which user want to delete.
 					if(d==111)		// If user typed '111', user be able to exit delete menu.
 					break;
 					for(i=0;i<n;i++)
@@ -282,10 +282,10 @@ main()		// Program starts from here.
 					else
 					{
 						cout<<"\n\tEnter Time quantum: ";
-						cin>>t;											// User is asked to enter time quantum.
+						cin>>t;							// User is asked to enter time quantum.
 						cout<<"\n\tIntial value of timer: "<<timer;		// Initial timer value is displayed.
-						algo(p,t,maxat,n);								// Main algo is called which perform scheduling.
-						arrivalsort(p,n);								// Processes are once again sorted on basis on Arrival time after scheduling. 
+						algo(p,t,maxat,n);					// Main algo is called which perform scheduling.
+						arrivalsort(p,n);					// Processes are once again sorted on basis on Arrival time after scheduling. 
 						cout<<"\n\tFinal value of timer: "<<timer;		// Final timer value timer is displayed.
 						cout<<"\n\n\tNow go to option 5 (' Final Result ') ";
 					}
@@ -294,7 +294,7 @@ main()		// Program starts from here.
 					break;
 					
 			case 5: system("CLS");			// In this case, Final result is displayed once scheduling is executed.
-					if(timer<=maxat.at)			// When scheduling is not run before this case, then user is asked to go option 4 first.
+					if(timer<=maxat.at)		// When scheduling is not run before this case, then user is asked to go option 4 first.
 						cout<<"\n\n\tERROR ...... Scheduler was not initiated, no processing was performed..!\n\n\t\tGo to option 4 (' Run Scheduling ') in MAIN MENU.\n\n";
 					else
 					{
