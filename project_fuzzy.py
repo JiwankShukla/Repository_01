@@ -61,7 +61,7 @@ result.input['stomachache'] = float(input(" Enter the severity of stomachache: "
 result.input['drycough'] = float(input(" Enter the severity of drycough: "))
 result.input['coldchill'] = float(input(" Enter the severity of coldchill: "))
 result.compute()
-print(result.output['prognosis'])
+print("Result: ",result.output['prognosis'])
 prognosis.view(sim=result)
 
 if result.output['prognosis']>=5.7:
